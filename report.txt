@@ -1,0 +1,30 @@
+=== Security REPORT ===
+
+REPORT GENERATED AT: 2026-05-12 16:48:15.810953
+
+== EVENT SUMMARY ==
+
+LOGIN_FAILED       | Count: 12
+UNKNOWN_USER       | Count: 2
+LOGIN_SUCCESS      | Count: 1
+
+== ATTACK LOGS ==
+
+BRUTE FORCE ALERTS: 4
+SEVERITY LEVEL: HIGH
+ATTACK TYPES DETECTED:BruteForce 
+Reason: IPS:151.196.114.44 94.90.132.120 230.92.235.93 59.54.73.242 
+had several failed login attempts in a short period of time.
+
+== Suspicious IPS==
+
+151.196.114.44     | Failed Attempts: 4  
+94.90.132.120      | Failed Attempts: 20 
+230.92.235.93      | Failed Attempts: 20 
+59.54.73.242       | Failed Attempts: 4  
+
+=== RECOMMENDED ACTION ===
+
+- Investigate repeated failed logins immediately.
+- Consider temporarily blocking high-risk IPs.
+- Review account activity for compromise.
