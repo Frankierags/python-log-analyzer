@@ -1,109 +1,164 @@
-# Python Log Analyzer
+# Python Security Log Analyzer
 
-A beginner cybersecurity project built with Python that analyzes login activity from log files and detects suspicious behavior such as repeated failed logins and rapid login attempts.
+A Python-based cybersecurity log analysis tool that simulates authentication events, detects suspicious login behavior, and generates automated security reports.
 
 ## Features
 
-* Reads and parses log files line-by-line
-* Detects `LOGIN_FAILED` events
-* Tracks failed login counts
-* Extracts timestamps using regex
-* Calculates time differences between login attempts
-* Detects rapid failed login activity
-* Extracts IP addresses dynamically using regex
-* Tracks failed login attempts by IP address using dictionaries
+- Parses simulated authentication logs
+- Detects failed login attempts
+- Identifies brute-force attack patterns
+- Tracks suspicious IP addresses
+- Generates automated security reports
+- Simulates realistic login events using a log generator
+- Tracks multiple security event types
+- Assigns severity levels based on detected activity
 
 ---
 
 # Technologies Used
 
-* Python 3
-* Regular Expressions (`re`)
-* Datetime handling (`datetime`)
-* Git + GitHub
-* Ubuntu WSL
-* VS Code
+- Python 3
+- Regex (`re`)
+- Datetime module
+- File handling
+- Dictionaries / event tracking
+- Linux terminal environment
 
 ---
 
-# Example Log Format
+# Project Structure
 
-```txt
-2026-05-12 08:22:44 LOGIN_FAILED user=admin ip=10.0.0.8
-2026-05-12 08:23:01 LOGIN_FAILED user=admin ip=10.0.0.8
-2026-05-12 08:23:19 LOGIN_FAILED user=admin ip=10.0.0.8
+```text
+python-log-analyzer/
+│
+├── main.py
+├── log_generator.py
+├── sample_logs.txt
+├── report.txt
+└── README.md
 ```
 
 ---
 
-# Current Detection Logic
+# How It Works
 
-The program currently:
+## 1. Log Generator
 
-1. Reads each log line
-2. Extracts timestamps using regex
-3. Converts timestamps into Python datetime objects
-4. Calculates the time difference between login attempts
-5. Resets counters when login attempts are too far apart
-6. Detects repeated failed logins in short time windows
-7. Tracks failed attempts per IP address
+`log_generator.py` simulates authentication activity by generating fake log events such as:
 
----
+- LOGIN_SUCCESS
+- LOGIN_FAILED
+- UNKNOWN_USER
+- ACCOUNT_LOCKED
 
-# Example Output
+Example generated logs:
 
-```txt
-LOGIN FAIL
-Current Count 1
-
-LOGIN FAIL
-Current Count 2
-
-LOGIN FAIL
-Current Count 3
-Suspicious Activity Detected
+```text
+2026-05-12 15:53:27 LOGIN_FAILED 61.124.247.191
+2026-05-12 15:53:27 LOGIN_SUCCESS 172.98.109.21
+2026-05-12 15:53:29 ACCOUNT_LOCKED 192.213.81.145
 ```
 
 ---
 
-# Skills Learned
+## 2. Log Analyzer
 
-This project helped practice:
+`main.py` parses the logs and performs analysis including:
 
-* Python programming fundamentals
-* File handling
-* Loops and conditionals
-* Dictionaries
-* Regex pattern matching
-* Datetime calculations
-* Linux terminal usage
-* Git version control
-* Basic cybersecurity detection logic
+- Counting failed login attempts
+- Tracking suspicious IP addresses
+- Detecting brute-force activity
+- Tracking event frequencies
+- Assigning severity levels
+- Generating automated security recommendations
 
 ---
 
-# Future Improvements
+# Example Report Output
 
-Planned upgrades:
+```text
+=== Security REPORT ===
 
-* Generate full security reports
-* Export findings to report files
-* Track failed attempts by username
-* Detect failed logins followed by successful logins
-* Build a Flask web dashboard
-* Add live monitoring capabilities
-* Add data visualizations and charts
+REPORT GENERATED AT: 2026-05-12 15:53:44
+
+== EVENT SUMMARY ==
+LOGIN_FAILED       | Count: 19
+UNKNOWN_USER       | Count: 2
+LOGIN_SUCCESS      | Count: 3
+ACCOUNT_LOCKED     | Count: 1
+
+FAILED LOGIN ATTEMPTS: 19
+BRUTE FORCE ALERTS: 3
+SEVERITY LEVEL: HIGH
+
+ATTACK TYPES DETECTED: Brute Force
+
+== Suspicious IPS ==
+61.124.247.191     | Failed Attempts: 7
+151.146.21.25      | Failed Attempts: 4
+174.164.194.125    | Failed Attempts: 7
+
+=== RECOMMENDED ACTION ===
+
+- Investigate repeated failed logins immediately.
+- Consider temporarily blocking high-risk IPs.
+- Review account activity for compromise.
+```
 
 ---
 
-# Running the Project
+# Running The Project
+
+## Generate Logs
+
+```bash
+python3 log_generator.py
+```
+
+## Analyze Logs
 
 ```bash
 python3 main.py
 ```
 
+## View Report
+
+```bash
+cat report.txt
+```
+
+---
+
+# Skills Demonstrated
+
+- Cybersecurity event analysis
+- Log parsing
+- Regex pattern matching
+- Threat detection logic
+- Security reporting automation
+- Python scripting
+- Linux command-line workflow
+- Event correlation
+- Basic SIEM-style analysis concepts
+
+---
+
+# Future Improvements
+
+- Username-based attack detection
+- Password spraying detection
+- CSV export support
+- Real-time log monitoring
+- IP reputation lookup
+- Dashboard visualization
+- GeoIP analysis
+- Multi-system log support
+- JSON log parsing
+- Alert prioritization
+
 ---
 
 # Author
 
-Frank Ragauskis
+Frank Ragauskis  
+Cybersecurity / Computer Science Student at Iowa State University
